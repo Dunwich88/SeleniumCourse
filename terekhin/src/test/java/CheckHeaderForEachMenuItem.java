@@ -29,7 +29,8 @@ public class CheckHeaderForEachMenuItem extends TestBase {
         List<WebElement> menuItems = driver.findElements(By.id("app-"));
         int menuItemsSize = menuItems.size();
 
-        for (int i = 0; i < menuItemsSize; i++) {
+        //TODO: click sub-menu items; assertions;
+        for (int i = 1; i == menuItemsSize; i++) {
             driver.findElement(By.cssSelector("#box-apps-menu:nth-child(" + i + ")")).click();
         }
     }
