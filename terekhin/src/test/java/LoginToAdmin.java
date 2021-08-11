@@ -1,18 +1,10 @@
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class LoginToAdmin {
-    private WebDriver driver;
 
-    @Before
-    public void start() {
-        driver = new ChromeDriver();
-    }
+public class LoginToAdmin extends TestBase {
 
     @Test
     public void loginToAdminPanel() {
@@ -28,11 +20,5 @@ public class LoginToAdmin {
         password.sendKeys("admin");
 
         loginBtn.click();
-    }
-
-    @After
-    public void stop() {
-        driver.quit();
-        driver = null;
     }
 }
