@@ -17,7 +17,7 @@ public class TestBase {
     public WebDriver driver;
     public WebDriverWait wait;
 
-    boolean isElementPresent(WebDriver driver, By locator) {
+    boolean isElementPresent(By locator) {
         try {
             driver.findElement(locator);
             return true;
@@ -52,8 +52,8 @@ public class TestBase {
 
     @After
     public void stop() {
-        driver.quit();
-        driver = null;
+//        driver.quit();
+//        driver = null;
     }
 
 }

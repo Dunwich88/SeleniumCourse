@@ -8,7 +8,7 @@ public class LoginToAdmin extends TestBase {
 
     @Test
     public void loginToAdminPanel() {
-        driver.get("https://localhost/litecart/admin/login.php");
+        driver.get("http://localhost/litecart/admin/login.php");
         WebElement username = driver.findElement(By.name("username"));
         WebElement password = driver.findElement(By.name("password"));
         WebElement loginBtn = driver.findElement(By.name("login"));
