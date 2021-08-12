@@ -1,3 +1,4 @@
+import org.junit.After;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -30,8 +31,9 @@ public class CheckHeaderForEachMenuItem extends TestBase {
         int menuItemsSize = menuItems.size();
 
         //TODO: click sub-menu items; assertions;
-        for (int i = 1; i == menuItemsSize; i++) {
-            driver.findElement(By.cssSelector("#box-apps-menu:nth-child(" + i + ")")).click();
+        for (int i = 1; i < menuItemsSize; i++) {
+            WebElement element = element = driver.findElement(By.cssSelector("#app-:nth-child(" + i + ")"));
+            element.findElement(By.tagName("a")).click();
         }
     }
 }
