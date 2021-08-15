@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 
-public class FirstTest extends TestBase {
+public class Task1 extends TestBase {
 
     @Test
     public void OpenGoogleAndSearch() {

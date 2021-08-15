@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class OneStickerPresenceTest extends TestBase {
+public class Task8 extends TestBase {
     @Test
     public void checkStickersPresece() {
         driver.get("http://localhost/litecart/en/");

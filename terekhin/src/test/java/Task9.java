@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class CountryAndGeozoneSortingTest extends TestBase {
+public class Task9 extends TestBase {
 
     public int getZonesNumber(WebElement webElement) {
         return Integer.parseInt(webElement.getAttribute("outerText"));

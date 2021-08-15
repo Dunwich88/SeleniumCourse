@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 
-public class LoginToAdmin extends TestBase {
+public class Task3 extends TestBase {
 
     @Test
     @Override

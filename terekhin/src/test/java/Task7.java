@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class CheckHeaderForEachMenuItem extends TestBase {
+public class Task7 extends TestBase {
     @Test
     public void clickAllMenuItems() {
         loginToAdminPanel();
