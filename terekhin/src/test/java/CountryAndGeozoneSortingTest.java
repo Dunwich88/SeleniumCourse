@@ -28,7 +28,7 @@ public class CountryAndGeozoneSortingTest extends TestBase {
         }
 
     @Test
-    public void geozoneSorting() {
+    public void geozoneInCountriesSorting() {
         loginToAdminPanel();
         WebElement countryBtn = driver.findElement(By.cssSelector("#app-:nth-child(3)"));
         countryBtn.click();
@@ -50,5 +50,36 @@ public class CountryAndGeozoneSortingTest extends TestBase {
                 driver.get("http://localhost/litecart/admin/?app=countries&doc=countries");
             }
         }
+        }
+
+        @Test
+        public void geozonesSorting() {
+            loginToAdminPanel();
+            driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+            int countriesSize = driver.findElements(By.cssSelector("#content > form > table > tbody > tr:not(.header):not(.footer)")).size();
+            for (int i = 1; i <= countriesSize ; i++) {
+                WebElement geozone = driver.findElement(By.cssSelector("#content > form > table > tbody > tr:nth-child("+ (i+1) + ") > td:nth-child(3) > a"));
+                geozone.click();
+                String disabled = driver.findElement(By.cssSelector("tr:nth-child(2) > td:nth-child(3) > select")).getAttribute("disabled");
+                if (disabled == null) {
+                    List<WebElement> geozoneDropDowns = driver.findElements(By.cssSelector("select:not(.select2-hidden-accessible) > option[selected=selected]"));
+                    List<String> geozoneDropDownsText = new LinkedList<>();
+                    for (WebElement gzDd : geozoneDropDowns) {
+                        geozoneDropDownsText.add(gzDd.getAttribute("outerText"));
+                    }
+                    assertTrue(isSorted(geozoneDropDownsText));
+                    driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+                }
+                else {
+                    List<WebElement> geozoneDropDowns = driver.findElements(By.cssSelector("td > span.select2"));
+                    List<String> geozoneDropDownsText = new LinkedList<>();
+                    for (WebElement gzDd : geozoneDropDowns) {
+                        geozoneDropDownsText.add(gzDd.getAttribute("outerText"));
+                    }
+                    assertTrue(isSorted(geozoneDropDownsText));
+                    driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+                }
+            }
+
         }
     }
