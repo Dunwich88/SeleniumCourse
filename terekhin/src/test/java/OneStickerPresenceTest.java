@@ -12,7 +12,7 @@ public class OneStickerPresenceTest extends TestBase {
         driver.get("http://localhost/litecart/en/");
         //Формируем список товаров
         List<WebElement> products = driver.findElements(By.className("product"));
-        //Идем по сформированному списку и для каждого товара проверяем наличие только одного стикера
+        //Проходим по сформированному списку и для каждого товара проверяем наличие только одного стикера
         for (WebElement we: products) {
             assertTrue(we.findElements(By.className("sticker")).size() == 1);
         }

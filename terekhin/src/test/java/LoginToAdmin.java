@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 public class LoginToAdmin extends TestBase {
 
     @Test
+    @Override
     public void loginToAdminPanel() {
         driver.get("http://localhost/litecart/admin/login.php");
         WebElement username = driver.findElement(By.name("username"));
