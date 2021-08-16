@@ -2,6 +2,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Task10 extends TestBase {
@@ -9,11 +10,11 @@ public class Task10 extends TestBase {
     public int[] getRgbColor(String color) {
         String[] colorValue = color.replace("rgba(", "").replace(")", "").split(",");
 
-        int r=Integer.parseInt(colorValue[0]);
+        int r = Integer.parseInt(colorValue[0]);
         colorValue[1] = colorValue[1].trim();
-        int g=Integer.parseInt(colorValue[1]);
+        int g = Integer.parseInt(colorValue[1]);
         colorValue[2] = colorValue[2].trim();
-        int b=Integer.parseInt(colorValue[2]);
+        int b = Integer.parseInt(colorValue[2]);
 
         int[] rgbColor = new int[3];
         rgbColor[0] = r;
@@ -29,8 +30,7 @@ public class Task10 extends TestBase {
         if (rgbColor[0] == rgbColor[1] && rgbColor[1] == rgbColor[2]) {
             if (rgbColor[0] == 0) {
                 return false;
-            }
-            else if (rgbColor[0] == 255)
+            } else if (rgbColor[0] == 255)
                 return false;
             else
                 return true;
@@ -55,15 +55,15 @@ public class Task10 extends TestBase {
     }
 
     public boolean isBold(String cssValue) {
-    if (cssValue.equals("bold"))
-        return true;
-    else if (Integer.parseInt(cssValue) >= 550)
-        return true;
-    else
-        return false;
+        if (cssValue.equals("bold"))
+            return true;
+        else if (Integer.parseInt(cssValue) >= 550)
+            return true;
+        else
+            return false;
     }
 
-    public boolean isBiggerSize(WebElement el1, WebElement el2) {
+    public boolean isBigger(WebElement el1, WebElement el2) {
         int size1 = el1.getSize().height * el1.getSize().width;
         int size2 = el2.getSize().height * el2.getSize().width;
 
@@ -91,13 +91,34 @@ public class Task10 extends TestBase {
         String mpCColor = mainPageCampaignPrice.getCssValue("color");
         String mpCFontWeight = mainPageCampaignPrice.getCssValue("font-weight");
 
-
         assertTrue(isColorGray(mpRpColor));
         assertTrue(isStrikeout(mpRpTextDec));
         assertTrue(isColorRed(mpCColor));
         assertTrue(isBold(mpCFontWeight));
-        assertTrue(isBiggerSize(mainPageCampaignPrice, mainPageRegularPrice));
+        assertTrue(isBigger(mainPageCampaignPrice, mainPageRegularPrice));
 
         campaignProduct.click();
+
+        WebElement productHeader = driver.findElement(By.tagName("h1"));
+        String productHeaderText = productHeader.getAttribute("outerText");
+
+        WebElement productRegularPrice = driver.findElement(By.className("regular-price"));
+        String productRegularPriceText = productRegularPrice.getAttribute("outerText");
+        String productRPColor = productRegularPrice.getCssValue("color");
+        String productRPTextDec = productRegularPrice.getCssValue("text-decoration");
+
+        WebElement productCampaignPrice = driver.findElement(By.className("campaign-price"));
+        String productCampaignPriceText = productCampaignPrice.getAttribute("outerText");
+        String productCPColor = productCampaignPrice.getCssValue("color");
+        String productCPFontWeight = productCampaignPrice.getCssValue("font-weight");
+
+        assertEquals(mainPageText, productHeaderText);
+        assertEquals(mpRegularPriceText, productRegularPriceText);
+        assertEquals(mpCampaignPriceText, productCampaignPriceText);
+        assertTrue(isColorGray(productRPColor));
+        assertTrue(isStrikeout(productRPTextDec));
+        assertTrue(isColorRed(productCPColor));
+        assertTrue(isBold(productCPFontWeight));
+        assertTrue(isBigger(productCampaignPrice, productRegularPrice));
     }
 }
