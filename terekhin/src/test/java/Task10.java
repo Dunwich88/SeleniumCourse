@@ -63,9 +63,10 @@ public class Task10 extends TestBase {
             return false;
     }
 
-    public boolean isBigger(WebElement el1, WebElement el2) {
-        int size1 = el1.getSize().height * el1.getSize().width;
-        int size2 = el2.getSize().height * el2.getSize().width;
+    public boolean isBiggerFont(WebElement el1, WebElement el2) {
+
+        double size1 = Double.parseDouble(el1.getCssValue("font-size").replaceAll("[px]", ""));
+        double size2 = Double.parseDouble(el2.getCssValue("font-size").replaceAll("[px]", ""));
 
         if (size1 > size2)
             return true;
@@ -79,15 +80,15 @@ public class Task10 extends TestBase {
     public void correctProductPage() {
         driver.get("http://localhost/litecart/en/");
         WebElement campaignProduct = driver.findElement(By.cssSelector("#box-campaigns div > ul > li"));
-        String mainPageText = campaignProduct.findElement(By.cssSelector("div.name")).getAttribute("outerText");
+        String mainPageText = campaignProduct.findElement(By.cssSelector("div.name")).getText();
 
         WebElement mainPageRegularPrice = campaignProduct.findElement(By.cssSelector(".regular-price"));
-        String mpRegularPriceText = mainPageRegularPrice.getAttribute("outerText");
+        String mpRegularPriceText = mainPageRegularPrice.getText();
         String mpRpColor = mainPageRegularPrice.getCssValue("color");
         String mpRpTextDec = mainPageRegularPrice.getCssValue("text-decoration");
 
         WebElement mainPageCampaignPrice = campaignProduct.findElement(By.cssSelector(".campaign-price"));
-        String mpCampaignPriceText = mainPageCampaignPrice.getAttribute("outerText");
+        String mpCampaignPriceText = mainPageCampaignPrice.getText();
         String mpCColor = mainPageCampaignPrice.getCssValue("color");
         String mpCFontWeight = mainPageCampaignPrice.getCssValue("font-weight");
 
@@ -95,22 +96,23 @@ public class Task10 extends TestBase {
         assertTrue(isStrikeout(mpRpTextDec));
         assertTrue(isColorRed(mpCColor));
         assertTrue(isBold(mpCFontWeight));
-        assertTrue(isBigger(mainPageCampaignPrice, mainPageRegularPrice));
+        assertTrue(isBiggerFont(mainPageCampaignPrice, mainPageRegularPrice));
 
         campaignProduct.click();
 
         WebElement productHeader = driver.findElement(By.tagName("h1"));
-        String productHeaderText = productHeader.getAttribute("outerText");
+        String productHeaderText = productHeader.getText();
 
         WebElement productRegularPrice = driver.findElement(By.className("regular-price"));
-        String productRegularPriceText = productRegularPrice.getAttribute("outerText");
+        String productRegularPriceText = productRegularPrice.getText();
         String productRPColor = productRegularPrice.getCssValue("color");
         String productRPTextDec = productRegularPrice.getCssValue("text-decoration");
 
         WebElement productCampaignPrice = driver.findElement(By.className("campaign-price"));
-        String productCampaignPriceText = productCampaignPrice.getAttribute("outerText");
+        String productCampaignPriceText = productCampaignPrice.getText();
         String productCPColor = productCampaignPrice.getCssValue("color");
         String productCPFontWeight = productCampaignPrice.getCssValue("font-weight");
+
 
         assertEquals(mainPageText, productHeaderText);
         assertEquals(mpRegularPriceText, productRegularPriceText);
@@ -119,6 +121,6 @@ public class Task10 extends TestBase {
         assertTrue(isStrikeout(productRPTextDec));
         assertTrue(isColorRed(productCPColor));
         assertTrue(isBold(productCPFontWeight));
-        assertTrue(isBigger(productCampaignPrice, productRegularPrice));
+        assertTrue(isBiggerFont(productCampaignPrice, productRegularPrice));
     }
 }
