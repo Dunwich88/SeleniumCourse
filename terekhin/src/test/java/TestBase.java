@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
@@ -47,6 +48,11 @@ public class TestBase {
         return true;
     }
 
+    public int generateRandomNumber() {
+        Random rnd = new Random();
+        return rnd.nextInt();
+    }
+
     public void jsExecutor(WebElement element, String script) {
         ((JavascriptExecutor) driver).executeScript(script, element);
     }
@@ -82,8 +88,8 @@ public class TestBase {
         System.out.println(((HasCapabilities) driver).getCapabilities());
         wait = new WebDriverWait(driver, 10);
 
-        Runtime.getRuntime().addShutdownHook(
-                new Thread(() -> {driver.quit(); driver = null;}));
+//        Runtime.getRuntime().addShutdownHook(
+//                new Thread(() -> {driver.quit(); driver = null;}));
     }
 
     @After

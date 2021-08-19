@@ -12,14 +12,7 @@ public class Task11 extends TestBase {
     String city = "Odessa";
     String phoneNumber = "2025550195";
     String password = "Qwerty123!";
-    String email = generateEmail();
-
-
-    public String generateEmail() {
-        Random rnd = new Random();
-        int rndI = rnd.nextInt();
-        return "email" + rndI + "@email.com";
-    }
+    String email = "email" + generateRandomNumber() + "@email.com";
 
     @Test
     public void createNewUser() {
