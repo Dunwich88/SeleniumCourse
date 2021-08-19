@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 
@@ -15,6 +16,7 @@ public class TestBase {
     public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
     public WebDriver driver;
     public WebDriverWait wait;
+
 
     boolean isElementPresent(By locator) {
         try {
@@ -44,6 +46,10 @@ public class TestBase {
             previous = current;
         }
         return true;
+    }
+
+    public void jsExecutor(WebElement element, String script) {
+        ((JavascriptExecutor) driver).executeScript(script, element);
     }
 
     public void loginToAdminPanel() {
@@ -77,8 +83,8 @@ public class TestBase {
         System.out.println(((HasCapabilities) driver).getCapabilities());
         wait = new WebDriverWait(driver, 10);
 
-        Runtime.getRuntime().addShutdownHook(
-                new Thread(() -> {driver.quit(); driver = null;}));
+//        Runtime.getRuntime().addShutdownHook(
+//                new Thread(() -> {driver.quit(); driver = null;}));
     }
 
     @After
