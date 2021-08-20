@@ -16,7 +16,7 @@ public class Task11 extends TestBase {
 
     @Test
     public void createNewUser() {
-        String selectUsaScript = "arguments[0].selectedIndex = 224; arguments[0].dispatchEvent(new Event('change'))";
+//      String selectUsaScript = "arguments[0].selectedIndex = 224; arguments[0].dispatchEvent(new Event('change'))";
 
         driver.get("http://localhost/litecart/en/");
         WebElement newCustomerLink = driver.findElement(By.cssSelector("table > tbody > tr:nth-child(5) a"));
@@ -34,7 +34,7 @@ public class Task11 extends TestBase {
         WebElement confirmedPasswordInput = driver.findElement(By.name("confirmed_password"));
         WebElement createAccountBtn = driver.findElement(By.name("create_account"));
 
-        jsExecutor(countryInput, selectUsaScript);
+        countryInput.sendKeys("United States");
         firstNameInput.sendKeys(firstName);
         lastNameInput.sendKeys(lastName);
         address1Input.sendKeys(address1);
