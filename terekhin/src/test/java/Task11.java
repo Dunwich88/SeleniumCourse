@@ -2,7 +2,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.Random;
 
 public class Task11 extends TestBase {
     String firstName = "firstName";
