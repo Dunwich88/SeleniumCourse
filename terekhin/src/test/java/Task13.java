@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Task13 extends TestBase {
     @Test
-    public void basketActions() {
+    public void basketActions() throws InterruptedException {
         for (int i = 0; i < 3; i++) {
             driver.get("http://localhost/litecart/en/");
             WebElement product = driver.findElement(By.className("product"));
@@ -40,6 +40,12 @@ public class Task13 extends TestBase {
 
         while (isElementPresent(By.name("remove_cart_item")))
         {
+            if (isElementPresent(By.cssSelector("a.inact.act")))
+                driver.findElement(By.cssSelector("a.inact.act")).click();
+            //Проверка ниже добавлена, так как по какой-то причине вхождение в цикл выполняется после удаления
+            //последнего предмета в корзине.
+            if (!isElementPresent(By.name("remove_cart_item")))
+                break;
             driver.findElement(By.name("remove_cart_item")).click();
             wait.until(ExpectedConditions.stalenessOf(summaryItems.get(0)));
         }
