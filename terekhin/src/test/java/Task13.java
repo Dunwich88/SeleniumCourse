@@ -36,16 +36,13 @@ public class Task13 extends TestBase {
         WebElement cartLink = driver.findElement(By.cssSelector("#cart br ~ a"));
         cartLink.click();
 
-        List<WebElement> summaryItems = driver.findElements(By.cssSelector("#order_confirmation-wrapper > table > tbody > tr:not(.header):not(.footer)"));
+
 
         while (isElementPresent(By.name("remove_cart_item")))
         {
+            List<WebElement> summaryItems = driver.findElements(By.cssSelector("#order_confirmation-wrapper > table > tbody > tr:not(.header):not(.footer)"));
             if (isElementPresent(By.cssSelector("a.inact.act")))
                 driver.findElement(By.cssSelector("a.inact.act")).click();
-            //Проверка ниже добавлена, так как по какой-то причине вхождение в цикл выполняется после удаления
-            //последнего предмета в корзине.
-            if (!isElementPresent(By.name("remove_cart_item")))
-                break;
             driver.findElement(By.name("remove_cart_item")).click();
             wait.until(ExpectedConditions.stalenessOf(summaryItems.get(0)));
         }
