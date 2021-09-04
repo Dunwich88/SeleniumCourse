@@ -3,6 +3,7 @@ import org.junit.Before;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,6 +34,13 @@ public class TestBase {
         @Override
         public void onException(Throwable throwable, WebDriver driver) {
             System.out.println(throwable);
+        }
+    }
+
+
+    public void getLogs() {
+        for (LogEntry l : driver.manage().logs().get("browser").getAll()) {
+            System.out.println(l);
         }
     }
 

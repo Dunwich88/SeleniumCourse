@@ -1,10 +1,12 @@
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntry;
 
 import java.util.List;
 
 public class Task17 extends TestBase{
+
     @Test
     public void browserLog() {
         loginToAdminPanel();
@@ -14,6 +16,7 @@ public class Task17 extends TestBase{
             linksToProducts = driver.findElements(By.cssSelector("tr:not(.header):not(.footer) > td:nth-child(3) > img + a"));
             linksToProducts.get(i).click();
             driver.findElement(By.name("cancel")).click();
+            getLogs();
         }
     }
 }
