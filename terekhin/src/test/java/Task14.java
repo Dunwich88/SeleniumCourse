@@ -1,4 +1,3 @@
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

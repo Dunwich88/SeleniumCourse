@@ -3,6 +3,8 @@ import org.junit.Before;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Iterator;
@@ -16,6 +18,23 @@ public class TestBase {
     public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
     public WebDriver driver;
     public WebDriverWait wait;
+
+    public static class MyListener extends AbstractWebDriverEventListener {
+        @Override
+        public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+            System.out.println(by);
+        }
+
+        @Override
+        public void afterFindBy(By by, WebElement element, WebDriver driver) {
+            System.out.println(by +  " found");
+        }
+
+        @Override
+        public void onException(Throwable throwable, WebDriver driver) {
+            System.out.println(throwable);
+        }
+    }
 
 
     boolean isElementPresent(By locator) {
@@ -81,7 +100,8 @@ public class TestBase {
         }
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
+        driver = new EventFiringWebDriver(new ChromeDriver(options));
+
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 
         tlDriver.set(driver);
